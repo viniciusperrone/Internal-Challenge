@@ -1,4 +1,3 @@
-from email.policy import default
 import graphene
 from graphene_django import DjangoObjectType
 from .models import ToDo
@@ -7,9 +6,10 @@ from .models import ToDo
 class ToDoType(DjangoObjectType):
     class Meta:
         model = ToDo
+        fields = '__all__'
 
 
-class ToDoMutation(graphene.Mutation):
+class CreateToDoMutation(graphene.Mutation):
     todo = graphene.Field(ToDoType)
 
     class Arguments:
@@ -30,8 +30,8 @@ class ToDoMutation(graphene.Mutation):
         )
         createTodo.save()
 
-        return ToDoMutation(todo=createTodo)
+        return CreateToDoMutation(todo=createTodo)
 
 
 class Mutation(graphene.ObjectType):
-    create_todo = ToDoMutation.Field()
+    create_todo = CreateToDoMutation.Field()
