@@ -32,6 +32,31 @@ class CreateToDoMutation(graphene.Mutation):
 
         return CreateToDoMutation(todo=createTodo)
 
+class UpdateToDoMutation(graphene.Mutation):
+    todo = graphene.Field(ToDoType)
+
+    class Arguments:
+        id = graphene.ID()
+        title = graphene.String(required=True)
+        description = graphene.String(required=True)
+        status = graphene.String(required=True)
+        fromDate = graphene.Date()
+        deadlineDate = graphene.Date(required=True)
+
+    @classmethod
+    def mutate(cls, root, info, **kwargs):
+        updateToDo = ToDo.objects.get(id=kwargs['id'])
+
+        updateToDo.title=kwargs['title'],
+        updateToDo.description=kwargs['description'],
+        updateToDo.status=kwargs['status'],
+        updateToDo.fromDate=kwargs['fromDate'],
+        updateToDo.deadlineDate=kwargs['deadlineDate']
+
+        updateToDo.save()
+
+        return UpdateToDoMutation(todo=updateToDo)
+
 
 class Query(graphene.ObjectType):
     all_todos = graphene.List(ToDoType)
@@ -42,3 +67,4 @@ class Query(graphene.ObjectType):
 
 class Mutation(graphene.ObjectType):
     create_todo = CreateToDoMutation.Field()
+    update_todo = UpdateToDoMutation.Field()
