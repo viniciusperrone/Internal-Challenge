@@ -33,5 +33,12 @@ class CreateToDoMutation(graphene.Mutation):
         return CreateToDoMutation(todo=createTodo)
 
 
+class Query(graphene.ObjectType):
+    all_todos = graphene.List(ToDoType)
+
+    def resolve_all_todos(root, info, **kwargs):
+        return ToDo.objects.all()
+
+
 class Mutation(graphene.ObjectType):
     create_todo = CreateToDoMutation.Field()
