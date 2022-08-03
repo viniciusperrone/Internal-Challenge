@@ -37,21 +37,12 @@ class UpdateToDoMutation(graphene.Mutation):
 
     class Arguments:
         id = graphene.ID()
-        title = graphene.String(required=True)
-        description = graphene.String(required=True)
         status = graphene.String(required=True)
-        fromDate = graphene.Date()
-        deadlineDate = graphene.Date(required=True)
 
     @classmethod
     def mutate(cls, root, info, **kwargs):
         updateToDo = ToDo.objects.get(id=kwargs['id'])
-
-        updateToDo.title=kwargs['title'],
-        updateToDo.description=kwargs['description'],
         updateToDo.status=kwargs['status'],
-        updateToDo.fromDate=kwargs['fromDate'],
-        updateToDo.deadlineDate=kwargs['deadlineDate']
 
         updateToDo.save()
 
