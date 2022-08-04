@@ -32,17 +32,18 @@ class CreateToDoMutation(graphene.Mutation):
 
         return CreateToDoMutation(todo=createTodo)
 
+
 class UpdateToDoMutation(graphene.Mutation):
     todo = graphene.Field(ToDoType)
 
     class Arguments:
-        id = graphene.ID()
+        id = graphene.ID(required=True)
         status = graphene.String(required=True)
 
     @classmethod
-    def mutate(cls, root, info, **kwargs):
-        updateToDo = ToDo.objects.get(id=kwargs['id'])
-        updateToDo.status=kwargs['status'],
+    def mutate(cls, root, info, id, status):
+        updateToDo = ToDo.objects.get(id=id)
+        updateToDo.status = status,
 
         updateToDo.save()
 
@@ -51,6 +52,7 @@ class UpdateToDoMutation(graphene.Mutation):
 
 class Query(graphene.ObjectType):
     all_todos = graphene.List(ToDoType)
+    todo_by_id = graphene.Field(ToDoType, id=graphene.ID())
 
     def resolve_all_todos(root, info, **kwargs):
         return ToDo.objects.all()
