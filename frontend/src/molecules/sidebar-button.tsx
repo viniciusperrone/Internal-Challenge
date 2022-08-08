@@ -22,8 +22,6 @@ export function Button({
 
   const Icon = icons[icon];
 
-  console.log(icons);
-
   return (
     <div
       className={classname(

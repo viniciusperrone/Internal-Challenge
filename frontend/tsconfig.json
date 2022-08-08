@@ -13,6 +13,7 @@
     "paths": {
       "assets/*": ["src/assets/*"],
       "utils/*": ["src/utils/*"],
+      "mui/*": ["src/mui/*"],
       "@atoms/*": ["src/atoms/*"],
       "@molecules/*": ["src/molecules/*"],
       "@organims/*": ["src/organims/*"],
