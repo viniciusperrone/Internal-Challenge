@@ -5,8 +5,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        inter: 'Inter' 
+      },
       textColor: {
-        'secondary': '#6B7280'
+        'primary': '#6B7280',
+        'secondary': '#10B981'
       },
       colors: {
         gray: {

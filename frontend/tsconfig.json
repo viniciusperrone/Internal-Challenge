@@ -13,6 +13,10 @@
     "paths": {
       "assets/*": ["src/assets/*"],
       "utils/*": ["src/utils/*"],
+      "@atoms/*": ["src/atoms/*"],
+      "@molecules/*": ["src/molecules/*"],
+      "@organims/*": ["src/organims/*"],
+      "@templates/*": ["src/templates/*"],
       "@components/*": ["src/components/*"],
       "@hooks/*": ["src/hooks/*"],
       "@pages/*": ["src/pages/*"],
