@@ -12,8 +12,9 @@
     "baseUrl": "./",
     "paths": {
       "assets/*": ["src/assets/*"],
-      "utils/*": ["src/utils/*"],
+      "lib/*": ["src/lib/*"],
       "mui/*": ["src/mui/*"],
+      "utils/*": ["src/utils/*"],
       "@atoms/*": ["src/atoms/*"],
       "@molecules/*": ["src/molecules/*"],
       "@organims/*": ["src/organims/*"],
