@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.9",
     "@emotion/cache": "^11.10.1",
     "@emotion/react": "^11.10.0",
     "@emotion/server": "^11.10.0",
@@ -18,6 +19,7 @@
     "@mui/material": "^5.9.3",
     "babel-plugin-inline-react-svg": "^2.0.1",
     "classnames": "^2.3.1",
+    "graphql": "^16.5.0",
     "next": "12.2.3",
     "phosphor-react": "^1.4.1",
     "react": "18.2.0",
