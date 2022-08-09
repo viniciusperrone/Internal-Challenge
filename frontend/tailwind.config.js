@@ -4,6 +4,11 @@ module.exports = {
     './src/**/*.tsx'
   ],
   theme: {
+    screens: {
+      'tablet': '640px',
+      'laptop': '1024px',
+      'desktop': '1280px',
+    },
     extend: {
       fontFamily: {
         inter: 'Inter' 
@@ -25,6 +30,12 @@ module.exports = {
         },
       }
     },
+    keyframes: {
+      appearFromLeft: {
+        'from': { transform: 'translateX(-250px)' },
+        'to': { transform: 'translateX(0)' }
+      }
+    }
   },
   plugins: [],
 }
