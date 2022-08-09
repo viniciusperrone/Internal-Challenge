@@ -7,9 +7,19 @@ import { Header } from '@molecules/header';
 import { Sidebar } from '@organims/Sidebar';
 import { Filters } from '@organims/Filters';
 import { Pagination } from '@organims/Pagination';
+import { useModal } from '@hooks/useModal';
+import { Modal as ModalCreate } from '@organims/modal-create';
+import { Modal as ModalUpdate } from '@organims/modal-update';
 
 export default function Home() {
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
+  const { modal, setModal, typeModal, setTypeModal } = useModal();
+
+  function handleCreateModal() {
+    setModal(true);
+    setTypeModal('create');
+  }
+
   return (
     <div>
       <Head>
@@ -34,12 +44,14 @@ export default function Home() {
           <main className="flex-1 flex flex-col gap-6 px-6 pt-[64px]">
             <div className="flex flex-row items-center justify-between">
               <h1 className="text-[24px] font-inter font-bold">To Do</h1>
-              <Button />
+              <Button onClick={handleCreateModal} />
             </div>
             <Filters />
             <Pagination />
           </main>
         </div>
+        {modal && typeModal === 'create' && <ModalCreate />}
+        {modal && typeModal === 'update' && <ModalUpdate />}
       </div>
     </div>
   );

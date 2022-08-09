@@ -8,9 +8,10 @@ type Props = {
 export const Context = createContext({});
 
 export default function ContextProvider({ children }: Props) {
-  const [openSidebar, setOpenSidebar] = useState<boolean>(false);
+  const [modal, setModal] = useState<boolean>(false);
+  const [typeModal, setTypeModal] = useState<'create' | 'update' | null>(null);
   return (
-    <Context.Provider value={{ openSidebar, setOpenSidebar }}>
+    <Context.Provider value={{ modal, setModal, typeModal, setTypeModal }}>
       {children}
     </Context.Provider>
   );
