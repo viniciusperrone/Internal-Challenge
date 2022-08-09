@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import { Sidebar } from '@organims/Sidebar';
 import { Header } from '@molecules/header';
+import { Button } from '@molecules/todo-button';
+import { Filters } from '@organims/Filters';
 
 export default function Home() {
   return (
@@ -24,7 +26,13 @@ export default function Home() {
         <Sidebar />
         <div className="flex-1 flex flex-col">
           <Header />
-          <main className="flex-1 flex flex-col px-6"></main>
+          <main className="flex-1 flex flex-col px-6 py-[64px]">
+            <div className="flex flex-row items-center justify-between">
+              <h1 className="text-[24px] font-inter font-bold">To Do</h1>
+              <Button />
+            </div>
+            <Filters />
+          </main>
         </div>
       </div>
     </div>

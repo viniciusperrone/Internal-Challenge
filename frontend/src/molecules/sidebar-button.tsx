@@ -9,23 +9,21 @@ type SidebarNavigationProps = {
   name?: string;
   description: string;
   icon: string;
-  children?: ReactNode;
 };
 
 export function Button({
   name = '/',
   description,
   icon,
-  children,
 }: SidebarNavigationProps) {
   const { pathname } = useRouter();
 
   const Icon = icons[icon];
 
   return (
-    <div
+    <button
       className={classname(
-        'w-full h-10 flex items-center px-[13px] gap-[10px]',
+        'w-full h-10 flex items-center px-[13px] gap-[10px] cursor-pointer',
         {
           'bg-[#242A38] rounded-lg': pathname === name,
         },
@@ -40,6 +38,6 @@ export function Button({
       >
         {description}
       </p>
-    </div>
+    </button>
   );
 }
