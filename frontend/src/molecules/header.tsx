@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'React';
+import { HTMLAttributes } from 'react';
 import { isMobile } from 'react-device-detect';
 import Image from 'next/image';
 import classname from 'classnames';
@@ -19,7 +19,7 @@ export function Header({ ...rest }: HeaderProps) {
       )}
     >
       {!isMobile && (
-        <span {...rest}>
+        <span className="table:hidden laptop:block" {...rest}>
           <Image src={Logo} />
         </span>
       )}

@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from 'react';
+import { gql, useMutation } from '@apollo/client';
 import { ArrowLeft } from 'phosphor-react';
 import { MenuItem, TextField } from '@mui/material';
 
@@ -8,10 +9,49 @@ import { Container } from '@atoms/modal-background';
 import { Title } from '@atoms/title-modal';
 import { Button } from '@molecules/modal-button ';
 
+// const CREATE_TODO_MUTATION = gql`
+//   mutation (
+//     $title: String!,
+//       $description: String!,
+//       $status: String!,
+//       $fromDate: Date!,
+//       $deadlineDate: Date!) {
+//     createTodo(
+//       title: $title,
+//       description: $description,
+//       $status: String!,
+//       $fromDate: Date!,
+//       $deadlineDate: Date!
+//     ) {
+//       todo {
+//         title
+//         description
+//         status
+//         fromDate
+//         deadlineDate
+//       }
+//     }
+//   }
+// `;
+
+interface ICreateToDo {
+  title: string;
+  description: string;
+  status: string;
+  fromDate: Date | string;
+  deadlineDate: Date | string;
+}
+
 export function Modal() {
   const { setModal, setTypeModal } = useModal();
   const [status, setStatus] = useState<string>();
+  const [todo, setTodo] = useState<ICreateToDo>({} as ICreateToDo);
 
+  // const [createTodo, { loading }] = useMutation(CREATE_TODO_MUTATION);
+
+  function onChange(value: string, name: string) {
+    setTodo({ [name]: value, ...todo });
+  }
   function handleGoBack() {
     setModal(false);
     setTypeModal(null);
@@ -20,12 +60,15 @@ export function Modal() {
   function handleChangeSelect(
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
-    setStatus(event.target.value);
+    onChange(event.target.value, 'status');
   }
 
+  async function handleCreateToDo() {
+    // await createTodo({ variables: { ...todo } });
+  }
   return (
     <Container>
-      <div className="w-[500px] min-h-[350px] bg-white rounded-[8px] shadow-lg pb-6">
+      <div className="laptop:w-[500px] min-h-[350px] bg-white rounded-[8px] shadow-lg pb-6  tablet:w-[420px]">
         <header className="px-10 py-[26px] flex flex-row items-center gap-3">
           <span className="cursor-pointer" onClick={handleGoBack}>
             <ArrowLeft size={24} className="text-purple-600" />
@@ -40,20 +83,24 @@ export function Modal() {
             label="Título"
             variant="outlined"
             sx={{ width: '100%' }}
+            value={todo.title}
+            onChange={e => onChange(e.target.value, 'title')}
           />
           <TextField
             id="outlined-basic"
             label="Descrição"
             variant="outlined"
             sx={{ width: '100%' }}
+            value={todo.description}
+            onChange={e => onChange(e.target.value, 'description')}
           />
           <TextField
             id="demo-simple-select"
-            value={status}
             label="Status"
             select
-            onChange={event => handleChangeSelect(event)}
             sx={{ width: '100%' }}
+            value={todo.status}
+            onChange={event => handleChangeSelect(event)}
           >
             <MenuItem value="Completo">Completo</MenuItem>
             <MenuItem value="Em andamento">Em andamento</MenuItem>
@@ -64,6 +111,8 @@ export function Modal() {
             label="A partir de"
             variant="outlined"
             sx={{ width: '100%' }}
+            value={todo.fromDate}
+            onChange={e => onChange(e.target.value, 'fromDate')}
           />
 
           <TextField
@@ -71,6 +120,8 @@ export function Modal() {
             label="Até"
             variant="outlined"
             sx={{ width: '100%' }}
+            value={todo.deadlineDate}
+            onChange={e => onChange(e.target.value, 'deadlineDate')}
           />
           <Button title="Completar Todo" />
         </main>

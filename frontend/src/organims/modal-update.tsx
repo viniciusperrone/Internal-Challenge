@@ -25,7 +25,7 @@ export function Modal() {
 
   return (
     <Container>
-      <div className="w-[500px] h-[350px] bg-white rounded-[8px] shadow-lg">
+      <div className="laptop:w-[500px] h-[350px] bg-white rounded-[8px] shadow-lg tablet:w-[420px]">
         <header className="px-10 py-[26px] flex flex-row items-center gap-3">
           <span className="cursor-pointer" onClick={handleGoBack}>
             <ArrowLeft size={24} className="text-purple-600" />
