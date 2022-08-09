@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'React';
-import { isMobile, isDesktop } from 'react-device-detect';
+import { isMobile } from 'react-device-detect';
 import Image from 'next/image';
 import classname from 'classnames';
 import NotificationsSVG from 'assets/notifications.svg';

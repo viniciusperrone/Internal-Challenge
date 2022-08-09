@@ -1,11 +1,12 @@
+import { useState } from 'react';
 import Head from 'next/head';
-import { Sidebar } from '@organims/Sidebar';
-import { Header } from '@molecules/header';
+import { isMobile } from 'react-device-detect';
+
 import { Button } from '@molecules/todo-button';
+import { Header } from '@molecules/header';
+import { Sidebar } from '@organims/Sidebar';
 import { Filters } from '@organims/Filters';
 import { Pagination } from '@organims/Pagination';
-import { useState } from 'react';
-import { isMobile } from 'react-device-detect';
 
 export default function Home() {
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);

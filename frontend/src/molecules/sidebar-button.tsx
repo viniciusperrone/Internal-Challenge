@@ -23,7 +23,7 @@ export function Button({
   return (
     <button
       className={classname(
-        'w-full h-10 flex items-center px-[13px] gap-[10px] cursor-pointer',
+        'tablet:w-full h-10 flex items-center px-[13px] gap-[10px] cursor-pointer',
         {
           'bg-[#242A38] rounded-lg': pathname === name,
         },
@@ -31,7 +31,7 @@ export function Button({
     >
       <Image src={Icon} />
       <p
-        className={classname('text-[14px] font-inter', {
+        className={classname('tablet:text-[14px] font-inter', {
           'text-secondary': pathname === name,
           'text-primary': pathname !== name,
         })}
