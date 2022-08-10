@@ -51,7 +51,7 @@ export function Modal() {
   const [createTodo, { loading }] = useMutation(CREATE_TODO_MUTATION);
 
   function onChange(value: string, name: string) {
-    setTodo({ [name]: value, ...todo });
+    setTodo({ ...todo, [name]: value });
   }
 
   function handleChangeSelect(
