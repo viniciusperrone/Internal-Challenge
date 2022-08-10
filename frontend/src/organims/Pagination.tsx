@@ -2,10 +2,12 @@ import { Pagination as PaginationUI } from '@mui/material';
 import { useModal } from '@hooks/useModal';
 import { Card } from './ToDoCard';
 import { gql, useQuery } from '@apollo/client';
+import { useSelectedTodo } from '@hooks/useSelectedTodo';
 
 const ALL_TODO_QUERY = gql`
   query {
     allTodos {
+      id
       title
       description
       status
@@ -15,7 +17,8 @@ const ALL_TODO_QUERY = gql`
   }
 `;
 
-interface ICreateToDo {
+interface IToDo {
+  id: string;
   title: string;
   description: string;
   status: string;
@@ -25,11 +28,15 @@ interface ICreateToDo {
 
 export function Pagination() {
   const { setModal, setTypeModal } = useModal();
-  const { data, loading } = useQuery<{ allTodos: ICreateToDo[] }>(
-    ALL_TODO_QUERY,
-  );
+  const { setTodoSelected } = useSelectedTodo();
+  const { data, loading } = useQuery<{ allTodos: IToDo[] }>(ALL_TODO_QUERY);
 
-  function handleUpdateCard() {
+  function handleUpdateCard(id: string, title: string, status: string) {
+    setTodoSelected({
+      id,
+      title,
+      status,
+    });
     setModal(true);
     setTypeModal('update');
   }
@@ -38,14 +45,14 @@ export function Pagination() {
       <main className="flex-1 flex flex-row flex-wrap gap-4">
         {!loading &&
           data.allTodos &&
-          data.allTodos.map((todo, index) => (
+          data.allTodos.map(todo => (
             <Card
-              key={index}
+              key={todo.id}
               title={todo.title}
               description={todo.description}
               date={String(todo.deadlineDate)}
               status={todo.status}
-              onClick={handleUpdateCard}
+              onClick={() => handleUpdateCard(todo.id, todo.title, todo.status)}
             />
           ))}
       </main>
