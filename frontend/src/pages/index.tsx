@@ -44,7 +44,11 @@ export default function Home() {
         })}
       >
         {openSidebar && !isMobile && <Sidebar />}
-        <div className="flex-1 flex flex-col">
+        <div
+          className={className('flex-1 flex flex-col', {
+            'ml-[280px]': openSidebar,
+          })}
+        >
           <Header onClick={() => setOpenSidebar(!openSidebar)} />
           <main className="flex-1 flex flex-col gap-6 px-6 pt-[64px]">
             <div className="flex flex-row items-center justify-between">

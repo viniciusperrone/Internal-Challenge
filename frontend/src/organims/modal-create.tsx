@@ -8,6 +8,7 @@ import { Description } from '@atoms/description-modal';
 import { Container } from '@atoms/modal-background';
 import { Title } from '@atoms/title-modal';
 import { Button } from '@molecules/modal-button ';
+import { dateFormat } from 'utils/dateFormat';
 
 const CREATE_TODO_MUTATION = gql`
   mutation (
@@ -45,12 +46,22 @@ interface ICreateToDo {
 
 export function Modal() {
   const { setModal, setTypeModal } = useModal();
-  const [todo, setTodo] = useState<ICreateToDo>({} as ICreateToDo);
+  const [todo, setTodo] = useState<ICreateToDo>({
+    title: null,
+    description: null,
+    status: null,
+    fromDate: dateFormat(new Date()),
+    deadlineDate: dateFormat(new Date()),
+  });
+  const [error, setError] = useState<boolean>(false);
 
   const [createToDo, { loading }] = useMutation(CREATE_TODO_MUTATION);
 
+  const dateDefault = dateFormat(new Date());
+
   function onChange(value: string, name: string) {
     setTodo({ ...todo, [name]: value });
+    console.log({ ...todo });
   }
 
   function handleGoBack() {
@@ -65,6 +76,19 @@ export function Modal() {
   }
 
   async function handleCreateToDo() {
+    if (!todo.title || !todo.title || !todo.status) {
+      setError(true);
+      return;
+    }
+
+    if (!todo.fromDate) {
+      onChange(dateDefault, 'fromDate');
+    }
+
+    if (!todo.deadlineDate) {
+      onChange(dateDefault, 'deadlineDate');
+    }
+
     try {
       createToDo({ variables: { ...todo } });
 
@@ -74,6 +98,7 @@ export function Modal() {
       console.log(error);
     }
   }
+
   return (
     <Container>
       <div className="laptop:w-[500px] bg-white rounded-[8px] shadow-lg pb-6  tablet:w-[420px]">
@@ -89,6 +114,7 @@ export function Modal() {
           <TextField
             label="Título"
             variant="outlined"
+            error={!todo.title && error && true}
             sx={{ width: '100%' }}
             value={todo.title}
             onChange={e => onChange(e.target.value, 'title')}
@@ -97,6 +123,7 @@ export function Modal() {
           <TextField
             label="Descrição"
             variant="outlined"
+            error={!todo.description && error && true}
             sx={{ width: '100%' }}
             value={todo.description}
             onChange={e => onChange(e.target.value, 'description')}
@@ -105,6 +132,7 @@ export function Modal() {
           <TextField
             label="Status"
             select
+            error={!todo.status && error && true}
             sx={{ width: '100%' }}
             value={todo.status}
             onChange={event => handleChangeSelect(event)}
@@ -118,6 +146,8 @@ export function Modal() {
             label="A partir de"
             variant="outlined"
             sx={{ width: '100%' }}
+            title={'A partir de'}
+            defaultValue={dateDefault}
             value={todo.fromDate}
             onChange={e => onChange(e.target.value, 'fromDate')}
           />
@@ -126,6 +156,7 @@ export function Modal() {
             label="Até"
             variant="outlined"
             sx={{ width: '100%' }}
+            defaultValue={dateDefault}
             value={todo.deadlineDate}
             onChange={e => onChange(e.target.value, 'deadlineDate')}
           />

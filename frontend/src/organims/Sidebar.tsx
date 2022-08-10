@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export function Sidebar() {
   return (
-    <div className="laptop:block bg-lilac-800 w-[280px] h-[100vh] animate-[appearFromLeft_0.6s] tablet:hidden">
+    <div className="laptop:block bg-lilac-800 w-[280px] h-[100vh] fixed animate-[appearFromLeft_0.6s] tablet:hidden">
       <header className="tablet:w-full h-[90px] border-b border-[#1F2937] flex items-center px-6">
         <Image src={Logo} />
       </header>
