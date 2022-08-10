@@ -70,37 +70,36 @@ export function Modal() {
   }
   return (
     <Container>
-      <div className="laptop:w-[500px] h-[90%] bg-white rounded-[8px] shadow-lg pb-6  tablet:w-[420px]">
-        <header className="px-10 py-[16px] flex flex-row items-center gap-3">
+      <div className="laptop:w-[500px] bg-white rounded-[8px] shadow-lg pb-6  tablet:w-[420px]">
+        <header className="px-8 py-4 flex flex-row items-center gap-3">
           <span className="cursor-pointer" onClick={handleGoBack}>
             <ArrowLeft size={24} className="text-purple-600" />
           </span>
           <p className="text-[18px] text-purple-600">Voltar</p>
         </header>
-        <main className="flex-1 flex flex-col px-6 gap-6">
+        <main className="flex-1 flex flex-col px-6 gap-4">
           <Title title="Novo TO DO" />
           <Description description='Completar Todo "MEDIUM"' />
           <TextField
-            id="outlined-basic"
             label="Título"
             variant="outlined"
-            sx={{ width: '100%', height: '40px' }}
+            sx={{ width: '100%' }}
             value={todo.title}
             onChange={e => onChange(e.target.value, 'title')}
           />
+
           <TextField
-            id="outlined-basic"
             label="Descrição"
             variant="outlined"
-            sx={{ width: '100%', height: '40px' }}
+            sx={{ width: '100%' }}
             value={todo.description}
             onChange={e => onChange(e.target.value, 'description')}
           />
+
           <TextField
-            id="demo-simple-select"
             label="Status"
             select
-            sx={{ width: '100%', height: '40px' }}
+            sx={{ width: '100%' }}
             value={todo.status}
             onChange={event => handleChangeSelect(event)}
           >
@@ -108,20 +107,19 @@ export function Modal() {
             <MenuItem value="Em andamento">Em andamento</MenuItem>
             <MenuItem value="A solicitar">A solicitar</MenuItem>
           </TextField>
+
           <TextField
-            id="outlined-basic"
             label="A partir de"
             variant="outlined"
-            sx={{ width: '100%', height: '40px' }}
+            sx={{ width: '100%' }}
             value={todo.fromDate}
             onChange={e => onChange(e.target.value, 'fromDate')}
           />
 
           <TextField
-            id="outlined-basic"
             label="Até"
             variant="outlined"
-            sx={{ width: '100%', height: '40px' }}
+            sx={{ width: '100%' }}
             value={todo.deadlineDate}
             onChange={e => onChange(e.target.value, 'deadlineDate')}
           />
