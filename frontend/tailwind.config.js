@@ -32,7 +32,7 @@ module.exports = {
     },
     keyframes: {
       appearFromLeft: {
-        'from': { transform: 'translateX(-250px)' },
+        'from': { transform: 'translateX(-280px)' },
         'to': { transform: 'translateX(0)' }
       }
     }

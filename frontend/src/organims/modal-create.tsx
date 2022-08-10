@@ -45,13 +45,17 @@ interface ICreateToDo {
 
 export function Modal() {
   const { setModal, setTypeModal } = useModal();
-  const [status, setStatus] = useState<string>();
   const [todo, setTodo] = useState<ICreateToDo>({} as ICreateToDo);
 
-  const [createTodo, { loading }] = useMutation(CREATE_TODO_MUTATION);
+  const [createToDo, { loading }] = useMutation(CREATE_TODO_MUTATION);
 
   function onChange(value: string, name: string) {
     setTodo({ ...todo, [name]: value });
+  }
+
+  function handleGoBack() {
+    setModal(false);
+    setTypeModal(null);
   }
 
   function handleChangeSelect(
@@ -60,13 +64,15 @@ export function Modal() {
     onChange(event.target.value, 'status');
   }
 
-  function handleGoBack() {
-    setModal(false);
-    setTypeModal(null);
-  }
-
   async function handleCreateToDo() {
-    await createTodo({ variables: { ...todo } });
+    try {
+      createToDo({ variables: { ...todo } });
+
+      setModal(false);
+      setTypeModal(null);
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <Container>
@@ -123,7 +129,11 @@ export function Modal() {
             value={todo.deadlineDate}
             onChange={e => onChange(e.target.value, 'deadlineDate')}
           />
-          <Button title="Completar Todo" onClick={handleCreateToDo} />
+          <Button
+            title={loading ? 'Carregando...' : 'Cadastrar novo Todo'}
+            onClick={handleCreateToDo}
+            disabled={loading}
+          />
         </main>
       </div>
     </Container>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Head from 'next/head';
+import className from 'classnames';
 import { isMobile } from 'react-device-detect';
 
 import { Button } from '@molecules/todo-button';
@@ -37,7 +38,11 @@ export default function Home() {
           rel="stylesheet"
         />
       </Head>
-      <div className="flex-1 flex flex-row">
+      <div
+        className={className('flex-1 flex flex-row', {
+          'animate-[appearFromLeft_0.5s]': openSidebar,
+        })}
+      >
         {openSidebar && !isMobile && <Sidebar />}
         <div className="flex-1 flex flex-col">
           <Header onClick={() => setOpenSidebar(!openSidebar)} />
