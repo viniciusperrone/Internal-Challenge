@@ -1,7 +1,6 @@
 import { ChangeEvent, useState } from 'react';
-import { InputAdornment, MenuItem, Select, TextField } from '@mui/material';
+import { InputAdornment, MenuItem, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import SearchSVG from 'assets/search.svg';
 import { useTodo } from '@hooks/useTodo';
 
 export function Filters() {
