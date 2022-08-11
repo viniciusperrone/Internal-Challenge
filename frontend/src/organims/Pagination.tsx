@@ -1,3 +1,4 @@
+import { ChangeEvent, useState } from 'react';
 import { Pagination as PaginationUI } from '@mui/material';
 import { gql, useQuery } from '@apollo/client';
 import { ClockLoader } from 'react-spinners';
@@ -5,7 +6,7 @@ import { ClockLoader } from 'react-spinners';
 import { useModal } from '@hooks/useModal';
 import { useSelectedTodo } from '@hooks/useSelectedTodo';
 import { Card } from './ToDoCard';
-import { ChangeEvent, useState } from 'react';
+import { Title } from '@atoms/title-default';
 
 const ALL_TODO_QUERY = gql`
   query {
@@ -36,14 +37,24 @@ export function Pagination() {
   const { setTodoSelected } = useSelectedTodo();
   const { data, loading } = useQuery<{ allTodos: IToDo[] }>(ALL_TODO_QUERY);
 
-  const QUANTITY_TODO = data.allTodos.length;
+  if (loading) {
+    return (
+      <div className="w-full min-h-full flex-1 flex justify-center items-center">
+        <ClockLoader size={40} color="#111827" />
+      </div>
+    );
+  }
 
-  const QUANTITY_PAGE = Math.round(QUANTITY_TODO / 2);
-
-  const arrayTodo =
-    page === 1
-      ? data.allTodos.slice(0, QUANTITY_PAGE)
-      : data.allTodos.slice(QUANTITY_PAGE);
+  if (data === undefined || data.allTodos === undefined) {
+    return (
+      <div className="w-full min-h-full flex justify-center items-center">
+        <strong className="text-[28px] text-lilac-800 font-inter font-bold text-center">
+          Sem deveres. <br />
+          Cadastre um novo todo
+        </strong>
+      </div>
+    );
+  }
 
   function handleUpdateCard(id: number, title: string, status: string) {
     setTodoSelected({
@@ -59,21 +70,14 @@ export function Pagination() {
     setPage(value);
   }
 
-  if (loading) {
-    return (
-      <div className="bg-green-200 self-center flex-1 flex justify-center items-center">
-        <ClockLoader size={30} color="#5048E5" />
-      </div>
-    );
-  }
+  const QUANTITY_TODO = data.allTodos.length;
 
-  if (!data.allTodos) {
-    return (
-      <div>
-        <h1>Sem Todos</h1>
-      </div>
-    );
-  }
+  const QUANTITY_PAGE = Math.round(QUANTITY_TODO / 2);
+
+  const arrayTodo =
+    page === 1
+      ? data.allTodos.slice(0, QUANTITY_PAGE)
+      : data.allTodos.slice(QUANTITY_PAGE);
 
   return (
     <div className="w-full h-full flex flex-col content-between">
