@@ -15,6 +15,7 @@ export const Context = createContext({});
 
 export default function ContextProvider({ children }: Props) {
   const [modal, setModal] = useState<boolean>(false);
+  const [confetti, setConfetti] = useState<boolean>(false);
   const [typeModal, setTypeModal] = useState<'create' | 'update' | null>(null);
   const [todoSelected, setTodoSelected] = useState<IToDoSelected>(
     {} as IToDoSelected,
@@ -24,6 +25,8 @@ export default function ContextProvider({ children }: Props) {
       value={{
         modal,
         setModal,
+        confetti,
+        setConfetti,
         typeModal,
         setTypeModal,
         todoSelected,

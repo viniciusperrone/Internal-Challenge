@@ -3,6 +3,7 @@ import { ArrowLeft } from 'phosphor-react';
 import { MenuItem, TextField } from '@mui/material';
 
 import { useModal } from '@hooks/useModal';
+import { useConfetti } from '@hooks/useConfetti';
 import { Description } from '@atoms/description-modal';
 import { Container } from '@atoms/modal-background';
 import { Title } from '@atoms/title-modal';
@@ -31,6 +32,7 @@ export function Modal() {
 
   const { setModal, setTypeModal } = useModal();
   const { todoSelected } = useSelectedTodo();
+  const { setConfetti } = useConfetti();
 
   const [updateTodo, { loading }] = useMutation(UPDATE_TODO_MUTATION);
 
@@ -51,9 +53,15 @@ export function Modal() {
       return;
     }
 
-    console.log({ todoSelected, status });
     try {
       updateTodo({ variables: { id: todoSelected.id, status } });
+
+      if (status === 'Completo') {
+        setConfetti(true);
+        setTimeout(() => {
+          setConfetti(false);
+        }, 6500);
+      }
 
       setModal(false);
       setTypeModal(null);

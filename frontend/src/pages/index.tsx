@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Head from 'next/head';
 import className from 'classnames';
 import { isMobile } from 'react-device-detect';
+import Confetti from 'react-confetti';
 
 import { useModal } from '@hooks/useModal';
 import { Button } from '@molecules/todo-button';
@@ -11,10 +12,12 @@ import { Filters } from '@organims/Filters';
 import { Pagination } from '@organims/Pagination';
 import { Modal as ModalCreate } from '@organims/modal-create';
 import { Modal as ModalUpdate } from '@organims/modal-update';
+import { useConfetti } from '@hooks/useConfetti';
 
 export default function Home() {
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
   const { modal, setModal, typeModal, setTypeModal } = useModal();
+  const { confetti } = useConfetti();
 
   function handleCreateModal() {
     setModal(true);
@@ -59,6 +62,15 @@ export default function Home() {
             <Pagination />
           </main>
         </div>
+        {confetti && (
+          <div className="w-full min-h-full fixed z-9">
+            <Confetti
+              width={screen.width}
+              height={screen.height}
+              className="fixed"
+            />
+          </div>
+        )}
         {modal && typeModal === 'create' && <ModalCreate />}
         {modal && typeModal === 'update' && <ModalUpdate />}
       </div>

@@ -137,7 +137,6 @@ export function Modal() {
             value={todo.status}
             onChange={event => handleChangeSelect(event)}
           >
-            <MenuItem value="Completo">Completo</MenuItem>
             <MenuItem value="Em andamento">Em andamento</MenuItem>
             <MenuItem value="A solicitar">A solicitar</MenuItem>
           </TextField>
