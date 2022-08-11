@@ -13,15 +13,30 @@ import { Pagination } from '@organims/Pagination';
 import { Modal as ModalCreate } from '@organims/modal-create';
 import { Modal as ModalUpdate } from '@organims/modal-update';
 import { useConfetti } from '@hooks/useConfetti';
+import { useTodo } from '@hooks/useTodo';
+import { Card } from '@organims/ToDoCard';
+import { useSelectedTodo } from '@hooks/useSelectedTodo';
 
 export default function Home() {
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
   const { modal, setModal, typeModal, setTypeModal } = useModal();
   const { confetti } = useConfetti();
+  const { setTodoSelected } = useSelectedTodo();
+  const { todo, searchClick } = useTodo();
 
   function handleCreateModal() {
     setModal(true);
     setTypeModal('create');
+  }
+
+  function handleUpdateCard(id: number, title: string, status: string) {
+    setTodoSelected({
+      id,
+      title,
+      status,
+    });
+    setModal(true);
+    setTypeModal('update');
   }
 
   return (
@@ -59,7 +74,24 @@ export default function Home() {
               <Button onClick={handleCreateModal} />
             </div>
             <Filters />
-            <Pagination />
+            {todo && searchClick ? (
+              <div className="flex-1 flex flex-row flex-wrap justify-center gap-4 pb-6">
+                {todo.map(item => (
+                  <Card
+                    key={item.id}
+                    title={item.title}
+                    description={item.description}
+                    date={String(item.deadlineDate)}
+                    status={item.status}
+                    onClick={() =>
+                      handleUpdateCard(item.id, item.title, item.status)
+                    }
+                  />
+                ))}
+              </div>
+            ) : (
+              <Pagination />
+            )}
           </main>
         </div>
         {confetti && (
