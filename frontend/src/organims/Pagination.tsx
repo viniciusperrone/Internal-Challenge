@@ -18,7 +18,7 @@ const ALL_TODO_QUERY = gql`
 `;
 
 interface IToDo {
-  id: string;
+  id: number;
   title: string;
   description: string;
   status: string;
@@ -31,7 +31,7 @@ export function Pagination() {
   const { setTodoSelected } = useSelectedTodo();
   const { data, loading } = useQuery<{ allTodos: IToDo[] }>(ALL_TODO_QUERY);
 
-  function handleUpdateCard(id: string, title: string, status: string) {
+  function handleUpdateCard(id: number, title: string, status: string) {
     setTodoSelected({
       id,
       title,
@@ -42,7 +42,7 @@ export function Pagination() {
   }
   return (
     <div className="w-full h-full flex flex-col content-between">
-      <main className="flex-1 flex flex-row flex-wrap gap-4">
+      <main className="flex-1 flex flex-row flex-wrap justify-center gap-4">
         {!loading &&
           data.allTodos &&
           data.allTodos.map(todo => (

@@ -11,7 +11,7 @@ import { useSelectedTodo } from '@hooks/useSelectedTodo';
 import { gql, useMutation } from '@apollo/client';
 
 const UPDATE_TODO_MUTATION = gql`
-  mutation ($id: String!, $status: String!) {
+  mutation ($id: ID!, $status: String!) {
     updateTodo(id: $id, status: $status) {
       todo {
         id
@@ -90,7 +90,7 @@ export function Modal() {
             <MenuItem value="A solicitar">A solicitar</MenuItem>
           </TextField>
           <Button
-            title="Completar Todo"
+            title={loading ? 'Atualizando...' : 'Completar Todo'}
             disabled={loading}
             onClick={handleUpdateToDo}
           />

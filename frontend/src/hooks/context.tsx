@@ -6,7 +6,7 @@ type Props = {
 };
 
 export interface IToDoSelected {
-  id: string;
+  id: number;
   title: string;
   status: string;
 }
