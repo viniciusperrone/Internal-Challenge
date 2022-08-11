@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Pagination as PaginationUI } from '@mui/material';
 import { gql, useQuery } from '@apollo/client';
 import { ClockLoader } from 'react-spinners';
@@ -81,9 +81,8 @@ export function Pagination() {
       ? data.allTodos.slice(0, QUANTITY_PAGE)
       : data.allTodos.slice(QUANTITY_PAGE);
 
-  useEffect(() => {
-    setTodo(data.allTodos);
-  }, []);
+  setTodo(data.allTodos);
+
   return (
     <div className="w-full h-full flex flex-col content-between">
       <main className="flex-1 flex flex-row flex-wrap justify-center gap-4">
