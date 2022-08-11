@@ -101,7 +101,7 @@ export function Modal() {
 
   return (
     <Container>
-      <div className="laptop:w-[500px] bg-white rounded-[8px] shadow-lg pb-6  tablet:w-[420px]">
+      <div className="laptop:w-[500px] bg-white rounded-[8px] shadow-lg pb-6  tablet:w-[90%]">
         <header className="px-8 py-4 flex flex-row items-center gap-3">
           <span className="cursor-pointer" onClick={handleGoBack}>
             <ArrowLeft size={24} className="text-purple-600" />
