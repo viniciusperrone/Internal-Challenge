@@ -3,12 +3,12 @@ import Head from 'next/head';
 import className from 'classnames';
 import { isMobile } from 'react-device-detect';
 
+import { useModal } from '@hooks/useModal';
 import { Button } from '@molecules/todo-button';
 import { Header } from '@molecules/header';
 import { Sidebar } from '@organims/Sidebar';
 import { Filters } from '@organims/Filters';
 import { Pagination } from '@organims/Pagination';
-import { useModal } from '@hooks/useModal';
 import { Modal as ModalCreate } from '@organims/modal-create';
 import { Modal as ModalUpdate } from '@organims/modal-update';
 
