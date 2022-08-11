@@ -1,6 +1,8 @@
 import { ChangeEvent, useState } from 'react';
 import { InputAdornment, MenuItem, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { isMobile } from 'react-device-detect';
+
 import { useTodo } from '@hooks/useTodo';
 
 export function Filters() {
@@ -9,7 +11,9 @@ export function Filters() {
     useTodo();
 
   const todoFilted = todo
-    ? todo.filter(todo => todo.title === search.title)
+    ? todo.filter(
+        todo => todo.title === search.title || todo.status === search.status,
+      )
     : [];
 
   function onChange(value: string, name: string) {
@@ -24,7 +28,6 @@ export function Filters() {
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
     onChange(event.target.value, 'status');
-    setStatus(event.target.value);
   }
 
   function handleSearch() {
@@ -70,7 +73,7 @@ export function Filters() {
         label="Status"
         select
         onChange={event => handleChangeSelect(event)}
-        sx={{ width: 180 }}
+        sx={{ width: isMobile ? 320 : 180 }}
       >
         <MenuItem value="Completo">Completo</MenuItem>
         <MenuItem value="Em andamento">Em andamento</MenuItem>
