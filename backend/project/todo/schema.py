@@ -10,14 +10,14 @@ class ToDoType(DjangoObjectType):
 
 
 class CreateToDoMutation(graphene.Mutation):
-    todo = graphene.Field(ToDoType)
-
     class Arguments:
         title = graphene.String(required=True)
         description = graphene.String(required=True)
         status = graphene.String(required=True)
         fromDate = graphene.Date()
         deadlineDate = graphene.Date(required=True)
+
+    todo = graphene.Field(ToDoType)
 
     @classmethod
     def mutate(cls, root, info, **kwargs):
@@ -34,17 +34,16 @@ class CreateToDoMutation(graphene.Mutation):
 
 
 class UpdateToDoMutation(graphene.Mutation):
-    todo = graphene.Field(ToDoType)
-
     class Arguments:
         id = graphene.ID(required=True)
         status = graphene.String(required=True)
 
+    todo = graphene.Field(ToDoType)
+
     @classmethod
     def mutate(cls, root, info, id, status):
         updateToDo = ToDo.objects.get(id=id)
-        updateToDo.status = status,
-
+        updateToDo.status = status
         updateToDo.save()
 
         return UpdateToDoMutation(todo=updateToDo)
