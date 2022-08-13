@@ -14,8 +14,8 @@ class CreateToDoMutation(graphene.Mutation):
         title = graphene.String(required=True)
         description = graphene.String(required=True)
         status = graphene.String(required=True)
-        fromDate = graphene.Date()
-        deadlineDate = graphene.Date(required=True)
+        fromDate = graphene.String(required=True)
+        deadlineDate = graphene.String(required=True)
 
     todo = graphene.Field(ToDoType)
 
