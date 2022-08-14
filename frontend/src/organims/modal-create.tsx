@@ -15,8 +15,8 @@ const CREATE_TODO_MUTATION = gql`
     $title: String!
     $description: String!
     $status: String!
-    $fromDate: Date!
-    $deadlineDate: Date!
+    $fromDate: String!
+    $deadlineDate: String!
   ) {
     createTodo(
       title: $title
@@ -110,7 +110,7 @@ export function Modal() {
         </header>
         <main className="flex-1 flex flex-col px-6 gap-4">
           <Title title="Novo TO DO" />
-          <Description description='Completar Todo "MEDIUM"' />
+          <Description description="Criar novo todo" />
           <TextField
             label="Título"
             variant="outlined"

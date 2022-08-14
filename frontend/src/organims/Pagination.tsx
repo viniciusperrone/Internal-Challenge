@@ -47,7 +47,7 @@ export function Pagination() {
     );
   }
 
-  if (data === undefined || data.allTodos === undefined) {
+  if (!data || !data.allTodos || data.allTodos.length === 0) {
     return (
       <div className="w-full min-h-full flex justify-center items-center">
         <strong className="text-[28px] text-lilac-800 font-inter font-bold text-center">

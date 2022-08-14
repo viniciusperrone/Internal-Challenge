@@ -1,5 +1,5 @@
 export function dateFormat(timestamp: Date) {
-  const day = timestamp.toISOString();
+  const date = timestamp.toLocaleDateString('pt-br');
 
-  return day.slice(0,10);
+  return date;
 }
