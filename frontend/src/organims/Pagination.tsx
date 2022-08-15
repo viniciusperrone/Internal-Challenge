@@ -84,7 +84,7 @@ export function Pagination() {
   setTodo(data.allTodos);
 
   return (
-    <div className="w-full h-full flex flex-col content-between">
+    <div className="w-full h-full flex flex-col justify-between">
       <main className="flex-1 flex flex-row flex-wrap justify-center gap-4">
         {QUANTITY_TODO > 4 ? (
           <>

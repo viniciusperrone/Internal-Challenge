@@ -20,6 +20,8 @@ export interface IToDo {
   deadlineDate: Date | string;
 }
 
+export interface IToDoSearch extends Omit<IToDo, 'description' | 'id'> {}
+
 export const Context = createContext({});
 
 export default function ContextProvider({ children }: Props) {

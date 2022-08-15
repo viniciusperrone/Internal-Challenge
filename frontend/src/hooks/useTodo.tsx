@@ -1,11 +1,11 @@
 import { useContext } from 'react';
-import { Context, IToDo } from './context';
+import { Context, IToDo, IToDoSearch } from './context';
 
 type ContextProps = {
   todo: IToDo[];
   setTodo: (todo: IToDo[]) => void;
-  search: IToDo;
-  setSearch: (todo: IToDo) => void;
+  search: IToDoSearch;
+  setSearch: (todo: IToDoSearch) => void;
   searchClick: boolean;
   setSearchClick: (searchClick: boolean) => void;
 };

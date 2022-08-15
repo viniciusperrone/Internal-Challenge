@@ -1,6 +1,7 @@
 import { ChangeEvent } from 'react';
 import { InputAdornment, MenuItem, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { mask, unMask } from 'remask';
 
 import { useTodo } from '@hooks/useTodo';
 
@@ -8,7 +9,9 @@ export function Filters() {
   const { search, setSearch, searchClick, setSearchClick, todo, setTodo } =
     useTodo();
 
-  const todoFilted = todo ? todo.filter(todo => todo === { ...search }) : [];
+  const todoFilted = todo
+    ? todo.filter(todo => todo.title === search.title)
+    : [];
 
   function onChange(value: string, name: string) {
     setSearch({ ...search, [name]: value });
@@ -55,6 +58,10 @@ export function Filters() {
         label="A partir de"
         variant="outlined"
         sx={{ width: 180 }}
+        value={search.fromDate}
+        onChange={e =>
+          onChange(mask(e.target.value, ['99/99/9999']), 'fromDate')
+        }
       />
 
       <TextField
@@ -62,6 +69,10 @@ export function Filters() {
         label="Até"
         variant="outlined"
         sx={{ width: 180 }}
+        value={search.deadlineDate}
+        onChange={e =>
+          onChange(mask(e.target.value, ['99/99/9999']), 'deadlineDate')
+        }
       />
 
       <TextField
