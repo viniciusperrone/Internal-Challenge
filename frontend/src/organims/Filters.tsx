@@ -10,7 +10,7 @@ export function Filters() {
     useTodo();
 
   const todoFilted = todo
-    ? todo.filter(todo => todo.title === search.title)
+    ? todo.filter(todo => todo.title === search.title || todo.status === search.status)
     : [];
 
   function onChange(value: string, name: string) {
